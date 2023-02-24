@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _body;
     private Vector3 _startPosition;
-    
+
+    public int jump = 1;
+
     public float accelerationSpeed = 15f;
     public float maxSpeed = 20f;
     
@@ -54,7 +54,11 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(_upKey))
         {
-            _body.velocity += new Vector2(0, ySpeed);
+            if (jump > 0)
+            {
+                _body.velocity += new Vector2(0, ySpeed);
+                jump -= 1;
+            }
         }
 
         if (Input.GetKeyDown(_downKey))
