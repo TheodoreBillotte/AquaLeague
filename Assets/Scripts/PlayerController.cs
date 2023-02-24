@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 _startPosition;
 
     public int jump = 1;
+    public float fallTime = 0;
+    public bool canFall = true;
+
 
     public float accelerationSpeed = 15f;
     public float maxSpeed = 20f;
@@ -29,7 +32,17 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float angle = transform.rotation.eulerAngles.z;
-        
+
+        if (!canFall)
+        {
+            fallTime += Time.deltaTime;
+            if (fallTime > .5f)
+            {
+                canFall = true;
+                fallTime = 0;
+            }
+        }
+
         if (!Input.GetKey(_upKey))
         {
             if (angle >= 330F)
@@ -61,9 +74,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_downKey))
+        if (Input.GetKeyDown(_downKey) && canFall)
         {
             _body.velocity += new Vector2(0, -ySpeed);
+            canFall = false;
         }
 
         if (Input.GetKey(_leftKey) && _body.velocity.x > -maxSpeed)
@@ -89,6 +103,6 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = _startPosition;
         _body.velocity = new Vector2(0, 0);
-        _body.rotation = 0;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }
