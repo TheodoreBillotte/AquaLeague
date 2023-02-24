@@ -27,21 +27,21 @@ public class PlayerController : MonoBehaviour
         {
             if (angle >= 330F)
             {
-                transform.rotation = Quaternion.Euler(0, 0, angle + rotationSpeed / 2);
+                transform.rotation = Quaternion.Euler(0, 0, (angle + rotationSpeed * Time.deltaTime / 2));
             }
             else if (angle <= 30)
             {
-                transform.rotation = Quaternion.Euler(0, 0, angle - rotationSpeed / 2);
+                transform.rotation = Quaternion.Euler(0, 0, (angle - rotationSpeed * Time.deltaTime / 2));
             }
         }
 
         if (angle is < 330 and > 30)
         {
             if (angle > 180) {
-                transform.rotation = Quaternion.Euler(0, 0, angle + rotationSpeed);
+                transform.rotation = Quaternion.Euler(0, 0, (angle + rotationSpeed * Time.deltaTime));
             }
             else {
-                transform.rotation = Quaternion.Euler(0, 0, angle - rotationSpeed);
+                transform.rotation = Quaternion.Euler(0, 0, (angle - rotationSpeed * Time.deltaTime));
             }
         }
         
@@ -57,19 +57,19 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftArrow) && _body.velocity.x > -maxSpeed)
         {
-            _body.velocity += new Vector2(-accelerationSpeed, 0);
+            _body.velocity += new Vector2(-accelerationSpeed, 0) * Time.deltaTime;
             if (Input.GetKey(KeyCode.UpArrow) && angle is > 330 or < 30)
             {
-                transform.rotation = Quaternion.Euler(0, 0, angle - rotationSpeed);
+                transform.rotation = Quaternion.Euler(0, 0, (angle - rotationSpeed * Time.deltaTime));
             }
         }
 
         if (Input.GetKey(KeyCode.RightArrow) && _body.velocity.x < maxSpeed)
         {
-            _body.velocity += new Vector2(accelerationSpeed, 0);
+            _body.velocity += new Vector2(accelerationSpeed, 0) * Time.deltaTime;
             if (Input.GetKey(KeyCode.UpArrow) && angle is > 330 or < 30)
             {
-                transform.rotation = Quaternion.Euler(0, 0, angle + rotationSpeed);
+                transform.rotation = Quaternion.Euler(0, 0, (angle + rotationSpeed * Time.deltaTime));
             }
         }
     }
