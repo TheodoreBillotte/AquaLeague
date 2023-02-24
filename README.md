@@ -1,2 +1,2 @@
 # AquaLeague
-It's Rocket League but with boats ans in water !
+It's Rocket League but in water !
