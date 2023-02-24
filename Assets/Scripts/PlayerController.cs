@@ -5,17 +5,24 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _body;
+    private Vector3 _startPosition;
     
-    public float accelerationSpeed = .1f;
-    public float maxSpeed = 10f;
+    public float accelerationSpeed = 15f;
+    public float maxSpeed = 20f;
     
     public float ySpeed = 5f;
-    public float rotationSpeed = 5f;
+    public float rotationSpeed = 200f;
+    
+    [SerializeField] private KeyCode _upKey = KeyCode.UpArrow;
+    [SerializeField] private KeyCode _downKey = KeyCode.DownArrow;
+    [SerializeField] private KeyCode _leftKey = KeyCode.LeftArrow;
+    [SerializeField] private KeyCode _rightKey = KeyCode.RightArrow;
 
     // Start is called before the first frame update
     void Start()
     {
         _body = GetComponent<Rigidbody2D>();
+        _startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -23,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         float angle = transform.rotation.eulerAngles.z;
         
-        if (!Input.GetKey(KeyCode.UpArrow))
+        if (!Input.GetKey(_upKey))
         {
             if (angle >= 330F)
             {
@@ -45,32 +52,39 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(_upKey))
         {
             _body.velocity += new Vector2(0, ySpeed);
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(_downKey))
         {
             _body.velocity += new Vector2(0, -ySpeed);
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow) && _body.velocity.x > -maxSpeed)
+        if (Input.GetKey(_leftKey) && _body.velocity.x > -maxSpeed)
         {
             _body.velocity += new Vector2(-accelerationSpeed, 0) * Time.deltaTime;
-            if (Input.GetKey(KeyCode.UpArrow) && angle is > 330 or < 30)
+            if (Input.GetKey(_upKey) && angle is > 330 or < 30)
             {
                 transform.rotation = Quaternion.Euler(0, 0, (angle - rotationSpeed * Time.deltaTime));
             }
         }
 
-        if (Input.GetKey(KeyCode.RightArrow) && _body.velocity.x < maxSpeed)
+        if (Input.GetKey(_rightKey) && _body.velocity.x < maxSpeed)
         {
             _body.velocity += new Vector2(accelerationSpeed, 0) * Time.deltaTime;
-            if (Input.GetKey(KeyCode.UpArrow) && angle is > 330 or < 30)
+            if (Input.GetKey(_upKey) && angle is > 330 or < 30)
             {
                 transform.rotation = Quaternion.Euler(0, 0, (angle + rotationSpeed * Time.deltaTime));
             }
         }
+    }
+    
+    public void ResetPosition()
+    {
+        transform.position = _startPosition;
+        _body.velocity = new Vector2(0, 0);
+        _body.rotation = 0;
     }
 }

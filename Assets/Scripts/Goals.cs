@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class Goals : MonoBehaviour
 {
     public int goals = 0;
-    public GameObject player;
-    
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2;
+
     private GameObject _game;
     private Text _score;
     private Goals _goalLeft;
@@ -27,12 +28,12 @@ public class Goals : MonoBehaviour
         if (ball.name == "Ball")
         {
             ball.transform.position = new Vector3(0, 0, 0);
-            player.transform.position = new Vector3(-15.5F, -4F, 0);
-
-            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            goals++;
             
+            player1.GetComponent<PlayerController>().ResetPosition();
+            player2.GetComponent<PlayerController>().ResetPosition();
+            
+            goals++;
             _score.text = _goalRight.goals + " - " + _goalLeft.goals;
         }
     }
