@@ -9,7 +9,8 @@ public class WaterCollision : MonoBehaviour
     {
         if (col.tag.Contains("Player"))
         {
-            col.GetComponent<PlayerController>().jump = 1;
+            PlayerController controller = col.GetComponent<PlayerController>();
+            controller.jump = controller.jumpAmount;
         }
     }
 }

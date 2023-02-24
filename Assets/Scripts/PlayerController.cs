@@ -5,9 +5,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _body;
     private Vector3 _startPosition;
 
+    
     public int jump = 1;
-    public float fallTime = 0;
-    public bool canFall = true;
+    private float _fallTime;
+    private bool _canFall = true;
 
 
     public float accelerationSpeed = 15f;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     
     public float ySpeed = 5f;
     public float rotationSpeed = 200f;
+    public int jumpAmount = 1;
     
     [SerializeField] private KeyCode _upKey = KeyCode.UpArrow;
     [SerializeField] private KeyCode _downKey = KeyCode.DownArrow;
@@ -33,13 +35,13 @@ public class PlayerController : MonoBehaviour
     {
         float angle = transform.rotation.eulerAngles.z;
 
-        if (!canFall)
+        if (!_canFall)
         {
-            fallTime += Time.deltaTime;
-            if (fallTime > .5f)
+            _fallTime += Time.deltaTime;
+            if (_fallTime > .5f)
             {
-                canFall = true;
-                fallTime = 0;
+                _canFall = true;
+                _fallTime = 0;
             }
         }
 
@@ -74,10 +76,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_downKey) && canFall)
+        if (Input.GetKeyDown(_downKey) && _canFall)
         {
             _body.velocity += new Vector2(0, -ySpeed);
-            canFall = false;
+            _canFall = false;
         }
 
         if (Input.GetKey(_leftKey) && _body.velocity.x > -maxSpeed)
