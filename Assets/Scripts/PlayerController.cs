@@ -1,18 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _body;
     private Vector3 _startPosition;
-
     
     public int jump = 1;
     private float _fallTime;
     private bool _canFall = true;
-
-
+    
     public float accelerationSpeed = 15f;
-    public float maxSpeed = 20f;
+    public float maxXSpeed = 20f;
+    public float maxYSpeed = 10f;
     
     public float ySpeed = 5f;
     public float rotationSpeed = 200f;
@@ -71,29 +71,33 @@ public class PlayerController : MonoBehaviour
         {
             if (jump > 0)
             {
-                _body.velocity += new Vector2(0, ySpeed);
+                float yMovement = Mathf.Clamp(_body.velocity.y + ySpeed, -maxYSpeed, maxYSpeed);
+                _body.velocity = new Vector2(_body.velocity.x, yMovement);
                 jump -= 1;
             }
         }
 
         if (Input.GetKeyDown(_downKey) && _canFall)
         {
-            _body.velocity += new Vector2(0, -ySpeed);
+            float yMovement = Mathf.Clamp(_body.velocity.y - ySpeed, -maxYSpeed, maxYSpeed);
+            _body.velocity = new Vector2(_body.velocity.x, yMovement);
             _canFall = false;
         }
 
-        if (Input.GetKey(_leftKey) && _body.velocity.x > -maxSpeed)
+        if (Input.GetKey(_leftKey))
         {
-            _body.velocity += new Vector2(-accelerationSpeed, 0) * Time.deltaTime;
+            float xMovement = Mathf.Clamp(_body.velocity.x - accelerationSpeed, -maxXSpeed, maxXSpeed);
+            _body.velocity += new Vector2(xMovement, 0) * Time.deltaTime;
             if (Input.GetKey(_upKey) && angle is > 330 or < 30)
             {
                 transform.rotation = Quaternion.Euler(0, 0, (angle - rotationSpeed * Time.deltaTime));
             }
         }
 
-        if (Input.GetKey(_rightKey) && _body.velocity.x < maxSpeed)
+        if (Input.GetKey(_rightKey))
         {
-            _body.velocity += new Vector2(accelerationSpeed, 0) * Time.deltaTime;
+            float xMovement = Mathf.Clamp(_body.velocity.x + accelerationSpeed, -maxXSpeed, maxXSpeed);
+            _body.velocity += new Vector2(xMovement, 0) * Time.deltaTime;
             if (Input.GetKey(_upKey) && angle is > 330 or < 30)
             {
                 transform.rotation = Quaternion.Euler(0, 0, (angle + rotationSpeed * Time.deltaTime));
