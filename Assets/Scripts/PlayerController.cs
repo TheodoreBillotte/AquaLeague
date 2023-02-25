@@ -105,6 +105,11 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = _startPosition;
         _body.velocity = new Vector2(0, 0);
+        _body.rotation = 0;
+        
         transform.rotation = Quaternion.Euler(0, 0, 0);
+        jump = jumpAmount;
+        _canFall = true;
+        _fallTime = 0;
     }
 }
