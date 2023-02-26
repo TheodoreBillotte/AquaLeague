@@ -914,8 +914,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8247871085688962501, guid: e212b082fff5b5ec2bb4242508fe9630, type: 3}
+      propertyPath: m_FlowAngle
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8247871085688962501, guid: e212b082fff5b5ec2bb4242508fe9630, type: 3}
+      propertyPath: m_LinearDrag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8247871085688962501, guid: e212b082fff5b5ec2bb4242508fe9630, type: 3}
       propertyPath: m_SurfaceLevel
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8247871085688962501, guid: e212b082fff5b5ec2bb4242508fe9630, type: 3}
+      propertyPath: m_FlowMagnitude
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8247871085688962501, guid: e212b082fff5b5ec2bb4242508fe9630, type: 3}
+      propertyPath: m_FlowVariation
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8247871085951673960, guid: e212b082fff5b5ec2bb4242508fe9630, type: 3}
       propertyPath: player1
