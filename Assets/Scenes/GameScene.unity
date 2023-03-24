@@ -875,6 +875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDuration: 120
+  sceneToLoad: FinalMenu
 --- !u!1001 &386380688356411517
 PrefabInstance:
   m_ObjectHideFlags: 0

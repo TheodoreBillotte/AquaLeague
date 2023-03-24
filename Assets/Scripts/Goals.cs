@@ -11,16 +11,16 @@ public class Goals : MonoBehaviour
     [SerializeField] private GameObject player2;
 
     private GameObject _game;
-    private Text _score;
-    private Goals _goalLeft;
-    private Goals _goalRight;
+    public Text score;
+    public Goals goalLeft;
+    public Goals goalRight;
 
     void Start()
     {
         _game = GameObject.Find("GAME");
-        _score = GameObject.Find("Scores").GetComponent<Text>();
-        _goalLeft = GameObject.Find("GOAL L").GetComponent<Goals>();
-        _goalRight = GameObject.Find("GOAL R").GetComponent<Goals>();
+        score = GameObject.Find("Scores").GetComponent<Text>();
+        goalLeft = GameObject.Find("GOAL L").GetComponent<Goals>();
+        goalRight = GameObject.Find("GOAL R").GetComponent<Goals>();
     }
 
     private void OnTriggerEnter2D(Collider2D ball)
@@ -34,8 +34,8 @@ public class Goals : MonoBehaviour
             player2.GetComponent<PlayerController>().ResetPosition();
             
             goals++;
-            _score.text = _goalRight.goals + " - " + _goalLeft.goals;
-			Debug.Log($"GOAL : {_score.text}");
+            score.text = goalRight.goals + " - " + goalLeft.goals;
+			Debug.Log($"GOAL : {score.text}");
         }
     }
 }
