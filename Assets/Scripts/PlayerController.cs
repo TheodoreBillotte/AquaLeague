@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(_downKey) && _canFall)
         {
-            float yMovement = Mathf.Clamp(_body.velocity.y - ySpeed, -maxYSpeed, maxYSpeed);
+            float yMovement = Mathf.Clamp(_body.velocity.y - (ySpeed * 1.2F), -maxYSpeed, maxYSpeed);
             _body.velocity = new Vector2(_body.velocity.x, yMovement);
             _canFall = false;
         }

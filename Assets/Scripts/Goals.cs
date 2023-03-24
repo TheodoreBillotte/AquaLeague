@@ -27,7 +27,7 @@ public class Goals : MonoBehaviour
     {
         if (ball.name == "Ball")
         {
-            ball.transform.position = new Vector3(0, 0, 0);
+            ball.transform.position = new Vector3(0, -5, 0);
             ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             
             player1.GetComponent<PlayerController>().ResetPosition();
@@ -35,6 +35,7 @@ public class Goals : MonoBehaviour
             
             goals++;
             _score.text = _goalRight.goals + " - " + _goalLeft.goals;
+			Debug.Log($"GOAL : {_score.text}");
         }
     }
 }

@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-
-	private float timer = 0;
 	private bool isFinished = false;
 	private Text text;
 	[SerializeField] private float gameDuration;
@@ -21,17 +19,17 @@ public class Timer : MonoBehaviour
     {
 	    if (!isFinished)
 	    {
-		    if (timer < gameDuration)
+		    if (gameDuration > 0)
 		    {
-			    timer += Time.deltaTime;
+			    gameDuration -= Time.deltaTime;
 		    }
 		    else
 		    {
 			    isFinished = true;
-			    timer = gameDuration;
+			    gameDuration = 0;
 			    Application.Quit();
 		    }
-		    text.text = String.Format("{0:00}:{1:00}", (int) timer / 60, (int) timer % 60);
+		    text.text = String.Format("{0:00}:{1:00}", (int) gameDuration / 60, (int) gameDuration % 60);
 	    }
     }
 }
