@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Goals : MonoBehaviour
 {
-    public int goals = 0;
     [SerializeField] private GameObject player1;
     [SerializeField] private GameObject player2;
 
@@ -14,10 +13,12 @@ public class Goals : MonoBehaviour
     public Text score;
     public Goals goalLeft;
     public Goals goalRight;
+    public GameManager _manager;
 
     void Start()
     {
         _game = GameObject.Find("GAME");
+        _manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         score = GameObject.Find("Scores").GetComponent<Text>();
         goalLeft = GameObject.Find("GOAL L").GetComponent<Goals>();
         goalRight = GameObject.Find("GOAL R").GetComponent<Goals>();
@@ -33,9 +34,11 @@ public class Goals : MonoBehaviour
             player1.GetComponent<PlayerController>().ResetPosition();
             player2.GetComponent<PlayerController>().ResetPosition();
             
-            goals++;
-            score.text = goalRight.goals + " - " + goalLeft.goals;
-			Debug.Log($"GOAL : {score.text}");
+            if (gameObject.name == "GOAL L")
+                _manager._player2++;
+            else
+                _manager._player1++;
+            score.text = _manager._player1 + " - " + _manager._player2;
         }
     }
 }

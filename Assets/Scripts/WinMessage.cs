@@ -6,18 +6,15 @@ using UnityEngine.UI;
 
 public class WinMessage : Goals
 {
-    private Text _text;
-    private Text _score;
 
     private void Start()
     {
-        _text = GameObject.Find("WinMessage").GetComponent<Text>();
-        _score = GameObject.Find("Scores").GetComponent<Text>();
+        GameManager _manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Text _win = GameObject.Find("WinMessage").GetComponent<Text>();
+        Text _score = GameObject.Find("Scores").GetComponent<Text>();
+        _win.text = _manager._player1 == _manager._player2 ? "It's A Draw !" :
+            _manager._player2 < _manager._player1 ? "Player Blue Won !" : "Player Red Won !";
+        _score.text = "Scores : " + _manager._player1 + " - " + _manager._player2;
     }
 
-    private void Update()
-    {
-        _text.text = goalLeft.goals < goalRight.goals ? "Player Blue Won !!" : "Player Red Won !!";
-        _score.text = "Scores : " + score.text;
-    }
 }
