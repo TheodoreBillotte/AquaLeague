@@ -844,7 +844,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5603280222390183710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a1d8a8c757a061a580483c1b0aeec5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 051a77d131f4eb529ae3b4b8f0946d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player1: {fileID: 0}
@@ -862,11 +862,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5603280222390183710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53a2eff2f26b01ce8a6505f3fcef9d61, type: 3}
+  m_Script: {fileID: 11500000, guid: c6f7b961f94ec94ab98b5bd00e8474c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: GameScene
   mainMenu: {fileID: 5603280222390183710}
+  _manager: {fileID: 0}
 --- !u!1 &5603280222667072821
 GameObject:
   m_ObjectHideFlags: 0
